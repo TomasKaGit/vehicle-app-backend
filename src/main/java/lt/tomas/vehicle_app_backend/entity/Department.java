@@ -13,7 +13,6 @@ public class Department {
     private Long id;
 
     private String name;
-    private String email;
 
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
@@ -27,11 +26,10 @@ public class Department {
     public Department() {}
 
 
-    public Department(String name, List<Vehicle> vehicles, List<EmailAddress> emails, String email) {
+    public Department(String name, List<Vehicle> vehicles, List<EmailAddress> emails) {
         this.name = name;
         this.vehicles = vehicles;
         this.emails = emails;
-        this.email = email;
     }
 
 
@@ -46,7 +44,5 @@ public class Department {
 
     public List<EmailAddress> getEmails() { return emails; }
     public void setEmailAddresses(List<EmailAddress> emailAddresses) { this.emails = emailAddresses; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    
 }

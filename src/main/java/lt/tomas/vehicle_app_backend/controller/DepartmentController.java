@@ -31,7 +31,6 @@ public class DepartmentController {
                 .map(dept -> new DepartmentDTO(
                         dept.getId(),
                         dept.getName(),
-                        dept.getEmail(),
                         //  Konvertuojame transporto priemones į VehicleDTO
                         dept.getVehicles().stream()
                                 .map(vehicle -> new VehicleDTO(
@@ -67,7 +66,6 @@ public class DepartmentController {
                 .map(dept -> ResponseEntity.ok(new DepartmentDTO(
                         dept.getId(),
                         dept.getName(),
-                        dept.getEmail(),
                         dept.getVehicles().stream()
                                 .map(vehicle -> new VehicleDTO(
                                         vehicle.getId(),
@@ -101,7 +99,6 @@ public class DepartmentController {
         return new DepartmentDTO(
                 saved.getId(),
                 saved.getName(),
-                saved.getEmail(),
                 List.of(), // pradžioje neturi transporto priemonių
                 List.of()  // pradžioje neturi el. pašto adresų
         );
@@ -136,7 +133,6 @@ public class DepartmentController {
                     return ResponseEntity.ok(new DepartmentDTO(
                             existing.getId(),
                             existing.getName(),
-                            existing.getEmail(),
                             List.of(), // Galima būtų gražinti ir su visa informacija
                             List.of()
                     ));
