@@ -2,12 +2,13 @@ package lt.tomas.vehicle_app_backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+
+@EnableScheduling
 @SpringBootApplication
-public class VehicleAppBackendApplication {
-
+public class VehicleAppBackend {
 	public static void main(String[] args) {
-		SpringApplication.run(VehicleAppBackendApplication.class, args);
+		SpringApplication.run(VehicleAppBackend.class, args);
 	}
-
 }
