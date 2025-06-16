@@ -1,6 +1,7 @@
 package lt.tomas.vehicle_app_backend;
 
 import lt.tomas.vehicle_app_backend.entity.Department;
+import lt.tomas.vehicle_app_backend.entity.EmailAddress;
 import lt.tomas.vehicle_app_backend.entity.Vehicle;
 import lt.tomas.vehicle_app_backend.repository.VehicleRepository;
 import lt.tomas.vehicle_app_backend.service.NotificationService;
@@ -17,7 +18,7 @@ public class VehicleChecker {
     private final VehicleRepository vehicleRepository;
     private final NotificationService notificationService;
 
-    public VehicleChecker (VehicleRepository vehicleRepository, NotificationService notificationService){
+    public VehicleChecker(VehicleRepository vehicleRepository, NotificationService notificationService) {
         this.vehicleRepository = vehicleRepository;
         this.notificationService = notificationService;
     }
@@ -29,7 +30,7 @@ public class VehicleChecker {
 
         for (Vehicle v : allVehicles) {
             Department dept = v.getDepartment();
-            if (dept == null || dept.getEmail() == null) continue;
+            if (dept == null || dept.getEmails() == null || dept.getEmails().isEmpty()) continue;
 
             long daysToInsurance = ChronoUnit.DAYS.between(today, v.getInsuranceExpiry());
             long daysToTech = ChronoUnit.DAYS.between(today, v.getTechnicalInspectionExpiry());
@@ -49,13 +50,17 @@ public class VehicleChecker {
             }
 
             if (!warning.isEmpty()) {
-                notificationService.sendEmail(
-                        dept.getEmail(),
-                        " Transporto priemonės įspėjimai",
-                        "Automobilis: " + v.getBrand() + " " + v.getModel() +
-                                " (" + v.getRegistrationNumber() + ")\n\n" +
-                                warning.toString()
-                );
+                for (EmailAddress emailAddress : dept.getEmails()) {
+                    if (emailAddress.getEmail() == null || emailAddress.getEmail().isBlank()) continue;
+
+                    notificationService.sendEmail(
+                            emailAddress.getEmail(),
+                            " Transporto priemonės įspėjimai",
+                            "Automobilis: " + v.getBrand() + " " + v.getModel() +
+                                    " (" + v.getRegistrationNumber() + ")\n\n" +
+                                    warning.toString()
+                    );
+                }
             }
         }
     }

@@ -29,7 +29,6 @@ public class NotificationService {
         for (Vehicle v : vehicles) {
             boolean sendWarning = false;
             StringBuilder message = new StringBuilder();
-
             LocalDate today = LocalDate.now();
 
             if (v.getInsuranceExpiry() != null) {

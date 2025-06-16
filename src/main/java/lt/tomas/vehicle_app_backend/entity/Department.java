@@ -44,5 +44,5 @@ public class Department {
 
     public List<EmailAddress> getEmails() { return emails; }
     public void setEmailAddresses(List<EmailAddress> emailAddresses) { this.emails = emailAddresses; }
-    
+
 }
