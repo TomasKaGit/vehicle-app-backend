@@ -76,7 +76,7 @@ public class DepartmentController {
                                         vehicle.getInsuranceExpiry().toString(),
                                         vehicle.getTechnicalInspectionExpiry().toString(),
                                         vehicle.isBroken(),
-                                        dept.getName() // 📌 Žinome, kad šis padalinys – tai ir yra vehicle.getDepartment()
+                                        dept.getName()
                                 ))
                                 .toList(),
                         dept.getEmails().stream()
@@ -99,8 +99,8 @@ public class DepartmentController {
         return new DepartmentDTO(
                 saved.getId(),
                 saved.getName(),
-                List.of(), // pradžioje neturi transporto priemonių
-                List.of()  // pradžioje neturi el. pašto adresų
+                List.of(),
+                List.of()
         );
     }
 
@@ -133,7 +133,7 @@ public class DepartmentController {
                     return ResponseEntity.ok(new DepartmentDTO(
                             existing.getId(),
                             existing.getName(),
-                            List.of(), // Galima būtų gražinti ir su visa informacija
+                            List.of(),
                             List.of()
                     ));
                 })
